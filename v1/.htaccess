@@ -1,0 +1,23 @@
+php_flag display_errors on
+SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^posts/([0-9]+)$ controller/posts.php?postid=$1 [L]
+RewriteRule ^posts/published controller/posts.php?published=Y [L]
+RewriteRule ^posts/draft controller/posts.php?published=N [L]
+RewriteRule ^posts/page/([0-9]+)$ controller/posts.php?page=$1 [L]
+RewriteRule ^posts$ controller/posts.php 
+
+RewriteRule ^users$ controller/users.php [L]
+
+RewriteRule ^sessions/([0-9]+)$ controller/sessions.php?sessionid=$1 [L]
+RewriteRule ^sessions$ controller/sessions.php [L]
+
+RewriteRule ^posts/([0-9]+)/images/([0-9]+)/attributes$ controller/images.php?postid=$1&imageid=$2&attributes=true [L]
+RewriteRule ^posts/([0-9]+)/images/([0-9]+)$ controller/images.php?postid=$1&imageid=$2 [L]
+RewriteRule ^posts/([0-9]+)/images$ controller/images.php?postid=$1 [L]
+
